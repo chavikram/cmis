@@ -17,9 +17,11 @@
 	<%= f.password_field :password_confirmation, autocomplete: "off" %>
 </div>
 <% if resource.contact.id.nil?%>
+<!--
 <p>
 	<%= f.link_to_add "Add a task", :contact %>
 </p>
+-->
 <%= f.fields_for :contact do |contact_form| %>
 <div>
 	<%= f.label :room_no %>
@@ -41,9 +43,11 @@
 	<br />
 	<%= contact_form.text_field :intercom %>
 </div>
+<!--
 <div>
 	<%= contact_form.link_to_remove "Remove this task" %>
 </div>
+-->
 <% end %>
 <% else %>
 <% resource.contact.url%>
