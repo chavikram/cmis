@@ -1,0 +1,16 @@
+/%div.btn­-group
+/  %button.btn.btn­-default.dropdown­-toggle{"type":"button","data­-toggle":"dropdown"}
+/  %b= "Dropdown"
+/  %span.caret
+   
+%ul.nav.nav
+  - if !current_user.nil? && current_user.is_admin?
+    %li=link_to "Complaint List", complaints_path
+    %li=link_to "Manage Complaint Types", complaint_types_path
+    %li= link_to "Manage Handlers", handlers_path
+    %li= link_to "Manage Status", statuses_path
+    %li= link_to "Manage Offices", offices_path
+  - else
+    %li=link_to "Check Status", complaints_path
+    %li= link_to "Register Complaint", new_complaint_path
+    

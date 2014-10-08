@@ -1,0 +1,56 @@
+<h2>Sign up</h2>
+<%= nested_form_for([resource,resource.with_contact], as: resource_name, url: registration_path(resource_name)) do |f| %>
+<%= devise_error_messages! %>
+<div>
+	<%= f.label :email %>
+	<br />
+	<%= f.email_field :email, autofocus: true %>
+</div>
+<div>
+	<%= f.label :password %> <% if @validatable %><i>(<%= @minimum_password_length %> characters minimum)</i><% end %>
+	<br />
+	<%= f.password_field :password, autocomplete: "off" %>
+</div>
+<div>
+	<%= f.label :password_confirmation %>
+	<br />
+	<%= f.password_field :password_confirmation, autocomplete: "off" %>
+</div>
+<% if resource.contact.id.nil?%>
+<p>
+	<%= f.link_to_add "Add a task", :contact %>
+</p>
+<%= f.fields_for :contact do |contact_form| %>
+<div>
+	<%= f.label :room_no %>
+	<br />
+	<%= contact_form.text_field :room_no %>
+</div>
+<div>
+	<%= f.label :office_id %>
+	<br />
+	<%= contact_form.collection_select(:office_id, Office.all, :id, :name)%>
+</div>
+<div>
+	<%= f.label :contact_no %>
+	<br />
+	<%= contact_form.text_field :contact_no %>
+</div>
+<div>
+	<%= f.label :intercom%>
+	<br />
+	<%= contact_form.text_field :intercom %>
+</div>
+<div>
+	<%= contact_form.link_to_remove "Remove this task" %>
+</div>
+<% end %>
+<% else %>
+<% resource.contact.url%>
+<%end%>
+<div>
+	<%= f.submit "Sign up" %>
+</div>
+<% end %>
+
+<%= render "devise/shared/links" %>
